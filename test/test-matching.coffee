@@ -1,6 +1,7 @@
 test = require 'tape'
 matching = require '../src/matching'
 adjacency_graphs = require '../src/adjacency_graphs'
+frequency_lists = require '../src/frequency_lists'
 
 # takes a pattern and list of prefixes/suffixes
 # returns a bunch of variants of that pattern embedded
@@ -49,6 +50,8 @@ check_matches = (prefix, t, matches, pattern_names, patterns, ijs, props) ->
       msg = "#{prefix}: matches[#{k}].#{prop_name} == #{prop_msg}"
       t.deepEqual match[prop_name], prop_list[k], msg
 
+# Setup matching frequency_lists
+matching.set_frequency_lists(frequency_lists)
 
 test 'matching utils', (t) ->
   t.ok matching.empty([]), ".empty returns true for an empty array"

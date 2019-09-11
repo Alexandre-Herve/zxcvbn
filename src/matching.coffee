@@ -1,4 +1,3 @@
-frequency_lists = require('./frequency_lists')
 adjacency_graphs = require('./adjacency_graphs')
 scoring = require('./scoring')
 
@@ -11,8 +10,6 @@ build_ranked_dict = (ordered_list) ->
   result
 
 RANKED_DICTIONARIES = {}
-for name, lst of frequency_lists
-  RANKED_DICTIONARIES[name] = build_ranked_dict lst
 
 GRAPHS =
   qwerty:     adjacency_graphs.qwerty
@@ -133,6 +130,10 @@ matching =
         password.length - 1 - match.i
       ]
     @sorted matches
+
+  set_frequency_lists: (frequency_lists) ->
+    for name, lst of frequency_lists
+      RANKED_DICTIONARIES[name] = build_ranked_dict lst
 
   set_user_input_dictionary: (ordered_list) ->
     RANKED_DICTIONARIES['user_inputs'] = build_ranked_dict ordered_list.slice()

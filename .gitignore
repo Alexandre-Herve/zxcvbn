@@ -8,3 +8,4 @@ node_modules
 *.swo
 tmux-*.log
 *.pyc
+yarn-error.log

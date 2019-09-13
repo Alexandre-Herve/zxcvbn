@@ -5,7 +5,16 @@ feedback = require './feedback'
 
 time = -> (new Date()).getTime()
 
+frequency_lists_are_set = false
+
+set_frequency_lists = (frequency_lists) ->
+  matching.set_frequency_lists(frequency_lists)
+  frequency_lists_are_set = true
+
 zxcvbn = (password, user_inputs = []) ->
+  if !frequency_lists_are_set
+    throw new Error('You need to setup frequency_list before using zxcvbn.')
+
   start = time()
   # reset the user inputs matcher on a per-request basis to keep things stateless
   sanitized_inputs = []
@@ -22,4 +31,4 @@ zxcvbn = (password, user_inputs = []) ->
   result.feedback = feedback.get_feedback result.score, result.sequence
   result
 
-module.exports = zxcvbn
+module.exports = Object.assign zxcvbn, { set_frequency_lists }

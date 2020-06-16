@@ -5,11 +5,12 @@
   "author": "Dan Wheeler",
   "license": "MIT",
   "main": "lib/main.js",
+  "types": "lib/main.d.ts",
   "repository": "dropbox/zxcvbn",
   "scripts": {
     "test": "coffeetape test/*.coffee | faucet",
     "test-saucelabs": "zuul -- test/*.coffee",
-    "build": "npm run build-lib ; npm run build-dist ; npm run build-json",
+    "build": "npm run build-lib ; npm run build-dist ; npm run build-json ; cp src/main.d.ts lib/",
     "watch": "npm run watch-lib & npm run watch-dist",
     "build-lib": "coffee -o lib --compile --bare --map src/*.coffee",
     "watch-lib": "coffee -o lib --compile --bare --map --watch src/*.coffee",
